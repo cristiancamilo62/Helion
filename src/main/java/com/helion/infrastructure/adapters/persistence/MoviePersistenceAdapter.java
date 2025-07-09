@@ -83,4 +83,9 @@ public class MoviePersistenceAdapter implements MovieRepositoryPort {
                 movieJparepository.findAll()
         );
     }
+
+    @Override
+    public boolean existsByTitle(String title) {
+        return movieJparepository.existsByTitle(title);
+    }
 }

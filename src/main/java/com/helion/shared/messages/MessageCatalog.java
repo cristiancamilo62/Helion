@@ -80,10 +80,10 @@ public class MessageCatalog {
 				"An unexpected error occurred."));
 
 		addMessage(Message.create(MessageCode.M0000018, MessageType.USER, MessageCategory.ERROR,
-				"Organization contact number already exists"));
+				""));
 
 		addMessage(Message.create(MessageCode.M0000019, MessageType.USER, MessageCategory.ERROR,
-				"Organization email already exists"));
+				""));
 
 		addMessage(Message.create(MessageCode.M0000020, MessageType.USER, MessageCategory.ERROR,
 				"must contain only letters, digits and spaces"));
@@ -95,11 +95,15 @@ public class MessageCatalog {
 				"can only contain letters, numbers, spaces, and basic punctuation (e.g., . , ( ) : ; ¡ ! ¿ ? & \\\" ')."));
 
 		addMessage(Message.create(MessageCode.M0000023, MessageType.USER, MessageCategory.ERROR,
-				"You have already applied to this event. Please wait for a response or check your existing applications."
+				""
 		));
 
 		addMessage(Message.create(MessageCode.M0000024, MessageType.TECHNICAL, MessageCategory.ERROR,
-				"A postulation already exists for the given user and event. This violates the unique postulation constraint."
+				""
+		));
+
+		addMessage(Message.create(MessageCode.M0000025, MessageType.USER, MessageCategory.ERROR,
+				"You have already added this movie."
 		));
 	}
     

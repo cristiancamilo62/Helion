@@ -17,5 +17,7 @@ public interface MovieJparepository extends JpaRepository<MovieEntity, UUID> {
     @Query("SELECT m FROM MovieEntity m WHERE m.user.id = :userId")
     List<MovieEntity> findByUserId(@Param("userId") UUID userId);
 
+    boolean existsByTitle(String title);
+
 
 }

@@ -30,7 +30,7 @@ public class OmdbExternalMovieService implements ExternalMovieService {
     @Override
     public MovieDomain searchMovieByTitle(String title) {
 
-        MovieDomain a =  webClient.get()
+        return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("t", title)
                         .queryParam("apikey", apiKey)
@@ -39,8 +39,6 @@ public class OmdbExternalMovieService implements ExternalMovieService {
                 .bodyToMono(MovieDomain.class)
                 .block();
 
-        System.out.println(a.getPoster());
-        return a;
     }
 
 
@@ -100,8 +98,8 @@ public class OmdbExternalMovieService implements ExternalMovieService {
                     // Segunda llamada: obtener detalles completos usando imdbID
                     OmdbDetailResponse detail = webClient.get()
                             .uri(uriBuilder -> uriBuilder
-                                    .queryParam("i", item.getImdbID()) // Usar imdbID es más confiable
-                                    .queryParam("apikey", apiKey)
+                                    .queryParam("i", item.getImdbID()) // Usar imdbID es más confiable que otros
+                                    .queryParam("apikey", apiKey) // que quiza no esten completos
                                     .queryParam("plot", "full") // Obtener plot completo
                                     .build())
                             .retrieve()
@@ -123,7 +121,7 @@ public class OmdbExternalMovieService implements ExternalMovieService {
                     }
                 } catch (Exception e) {
                     // Log del error y continuar con la siguiente película
-                    System.err.println("Error obteniendo detalles para película: " + item.getTitle() + " - " + e.getMessage());
+                    System.err.println(e.getMessage());
                 }
             }
 

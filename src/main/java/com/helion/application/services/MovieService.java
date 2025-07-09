@@ -4,6 +4,7 @@ import com.helion.application.dto.MovieDTO;
 import com.helion.application.dto.UserDTO;
 import com.helion.application.mapper.MovieMapperDTO;
 import com.helion.domain.model.movie.MovieDomain;
+import com.helion.domain.model.movie.rules.business.MovieExistBusinessRule;
 import com.helion.domain.ports.input.MovieServicePort;
 import com.helion.domain.ports.input.UserServicePort;
 import com.helion.domain.ports.output.MovieRepositoryPort;
@@ -23,6 +24,7 @@ public class MovieService implements MovieServicePort {
 
     private final MovieRepositoryPort movieRepository;
     private final MovieMapperDTO movieMapperDTO;
+    private final MovieExistBusinessRule movieExistBusinessRule;
 
     @Override
     public void createMovie(MovieDTO movie) {
@@ -34,6 +36,8 @@ public class MovieService implements MovieServicePort {
         movieSave.setUserId(movie.getUserId());
 
         movieSave.setCreatedAt(LocalDateTime.now());
+
+        movieExistBusinessRule.validate(movieSave.getTitle());
 
         movieRepository.save(movieSave);
     }

@@ -31,4 +31,6 @@ public interface MovieRepositoryPort {
     void delete(UUID id);
 
     List<MovieDomain> findAllMovies();
+
+    boolean existsByTitle(String title);
 }
