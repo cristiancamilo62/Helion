@@ -4,6 +4,7 @@ import com.helion.domain.model.movie.MovieDomain;
 import com.helion.domain.ports.output.MovieRepositoryPort;
 import com.helion.infrastructure.adapters.external.ExternalMovieService;
 import com.helion.infrastructure.adapters.persistence.mapper.MovieMapperEntity;
+import com.helion.infrastructure.entities.MovieEntity;
 import com.helion.infrastructure.repositories.MovieJparepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,9 @@ public class MoviePersistenceAdapter implements MovieRepositoryPort {
 
     @Override
     public void save(MovieDomain movieDomain) {
-        movieJparepository.save(movieMapperEntity.toEntity(movieDomain));
+        MovieEntity entity = movieMapperEntity.toEntity(movieDomain);
+
+        movieJparepository.save(entity);
     }
 
     @Override
@@ -34,12 +37,16 @@ public class MoviePersistenceAdapter implements MovieRepositoryPort {
 
     @Override
     public List<MovieDomain> findMoviesByUserId(UUID userId) {
-        return List.of();
+        return movieMapperEntity.toDomainList(movieJparepository.findByUserId(userId));
+    }
+
+    @Override
+    public List<MovieDomain> getMoviesByTitle(String title) {
+        return externalMovieService.searchMoviesByCTitle(title);
     }
 
     @Override
     public MovieDomain getMovieByTitle(String title) {
-        System.out.println(externalMovieService.searchMovieByTitle(title).getDirector());
         return externalMovieService.searchMovieByTitle(title);
     }
 

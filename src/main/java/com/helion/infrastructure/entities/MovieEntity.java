@@ -27,6 +27,9 @@ public class MovieEntity {
     @Column(name = "year")
     private String year;
 
+    @Column(name = "poster")
+    private String poster;
+
     @Column(name = "director")
     private String director;
 

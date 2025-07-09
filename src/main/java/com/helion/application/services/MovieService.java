@@ -11,6 +11,7 @@ import com.helion.domain.ports.output.UserRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,6 @@ import java.util.UUID;
 public class MovieService implements MovieServicePort {
 
     private final MovieRepositoryPort movieRepository;
-    private final UserServicePort userService;
     private final MovieMapperDTO movieMapperDTO;
 
     @Override
@@ -30,6 +30,10 @@ public class MovieService implements MovieServicePort {
         MovieDomain movieSave = movieMapperDTO.toDomain(movie);
 
         movieSave.setId(UUID.randomUUID());
+
+        movieSave.setUserId(movie.getUserId());
+
+        movieSave.setCreatedAt(LocalDateTime.now());
 
         movieRepository.save(movieSave);
     }
@@ -41,11 +45,17 @@ public class MovieService implements MovieServicePort {
 
     @Override
     public List<MovieDTO> getMoviesByUserId(UUID userId) {
-        return List.of();
+
+        return movieMapperDTO.toDTOList(movieRepository.findMoviesByUserId(userId));
     }
 
     @Override
-    public MovieDTO searchMoviesByTitle(String title) {
+    public List<MovieDTO> searchMoviesByTitle(String title) {
+        return movieMapperDTO.toDTOList(movieRepository.getMoviesByTitle(title));
+    }
+
+    @Override
+    public MovieDTO searchMovieByTitle(String title) {
         return movieMapperDTO.toDTO(movieRepository.getMovieByTitle(title));
     }
 
@@ -71,6 +81,7 @@ public class MovieService implements MovieServicePort {
 
     @Override
     public void deleteMovie(UUID id) {
+        movieRepository.delete(id);
 
     }
 

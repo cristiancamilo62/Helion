@@ -1,5 +1,6 @@
 package com.helion.domain.model.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 public class MovieDomain {
 
     private UUID id;
+
     @JsonProperty("Title")
     private String title;
 
@@ -24,6 +26,7 @@ public class MovieDomain {
 
     @JsonProperty("Poster")
     private String poster;
+
     private UUID userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -35,6 +38,7 @@ public class MovieDomain {
         this.year = year;
         this.director = director;
         this.genre = genre;
+        this.poster = poster;
         this.userId = userId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

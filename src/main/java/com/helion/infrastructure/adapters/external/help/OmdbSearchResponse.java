@@ -1,11 +1,7 @@
 package com.helion.infrastructure.adapters.external.help;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.helion.domain.model.movie.MovieDomain;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,11 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 public class OmdbSearchResponse {
     @JsonProperty("Search")
-    private List<MovieDomain> search;
+    private List<OmdbSearchItem> search;
 
     @JsonProperty("totalResults")
     private String totalResults;
 
     @JsonProperty("Response")
     private String response;
+
+    @JsonProperty("Error")
+    private String error;
 }

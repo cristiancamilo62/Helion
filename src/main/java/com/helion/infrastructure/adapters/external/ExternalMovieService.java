@@ -12,4 +12,6 @@ public interface ExternalMovieService {
 
     List<MovieDomain> searchMovieByYear(String year);
 
+    List<MovieDomain> searchMoviesByCTitle(String title);
+
 }

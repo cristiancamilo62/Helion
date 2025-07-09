@@ -15,7 +15,9 @@ public interface MovieServicePort {
 
     List<MovieDTO> getMoviesByUserId(UUID userId);
 
-    MovieDTO searchMoviesByTitle(String title);
+    List<MovieDTO> searchMoviesByTitle(String title);
+
+    MovieDTO searchMovieByTitle(String title);
 
     List<MovieDTO> searchMoviesByGenre(String genre);
 

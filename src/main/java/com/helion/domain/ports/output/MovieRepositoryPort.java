@@ -16,6 +16,8 @@ public interface MovieRepositoryPort {
 
     List<MovieDomain> findMoviesByUserId(UUID userId);
 
+    List<MovieDomain> getMoviesByTitle(String title);
+
     MovieDomain getMovieByTitle(String title);
 
     List<MovieDomain> getMoviesByGenre(String genre);

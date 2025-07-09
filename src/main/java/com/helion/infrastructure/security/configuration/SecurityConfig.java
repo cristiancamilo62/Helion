@@ -38,26 +38,12 @@ public class SecurityConfig {
                 )
                 // 4) Configura accesos públicos y protegidos
                 .authorizeHttpRequests(auth -> auth
-                        // permitir POST/GET a /api/v1/organizations/**
-                        .requestMatchers(HttpMethod.POST, "/api/v1/events").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/api/v1/events/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT,  "/api/v1/events").permitAll()
-
-                        .requestMatchers(HttpMethod.POST,  "/api/v1/movies/register").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/api/v1/movies/dummy").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/api/v1/movies/**").permitAll()
-
-                        //register and dummy org
-                        .requestMatchers(HttpMethod.POST, "/api/v1/organizations").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/api/v1/organizations/dummy").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/api/v1/organizations/dummy").permitAll()
                         
                         // login(user and org) y register of user
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/users/r").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/dummy").permitAll()
 
-                        // login y registro de organizaciones
 
                         // el resto requiere token válido
                         .anyRequest().authenticated()
